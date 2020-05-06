@@ -5,7 +5,7 @@ const cors = require('cors')
 
 const app = express()
 app.use(bodyParser.json())
-const cors = require('cors')
+app.use(cors)
 
 const commentsByPostId = {}
 
@@ -14,15 +14,17 @@ app.get('/posts/:id/comments', (req, res) => {
 })
 
 app.post('/posts/:id/comments', (req, res) => {
+    console.log('req')
+
     const id = randomBytes(4).toString('hex')
     const { content } = req.body
     const comments = commentsByPostId[req.params.id] || []
     comments.push({ id, content })
     commentsByPostId[req.params.id] = comments
-    res.status(200).send(comments)
+    res.status(201).send(comments)
 })
 
 
 app.listen(4001, () => {
-    console.log('hello from posts!')
+    console.log('hello from comments!')
 })

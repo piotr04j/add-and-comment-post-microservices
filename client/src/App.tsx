@@ -1,11 +1,15 @@
 import React from 'react'
-import Posts from './Posts'
+import PostCreate from './PostCreate'
+import PostList from './PostList'
 
 export default () => {
     return (
         <div className="container">
             <h1>Create Post</h1>
-            <Posts />
+            <PostCreate />
+            <hr/>
+            Posts:
+            <PostList />
         </div>
     )
 }

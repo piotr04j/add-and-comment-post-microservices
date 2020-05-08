@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import axios from 'axios'
 
 
-export default () => {
+const PostCreate: React.FC = () => {
 
     const[title, setTitle] = useState<string>('')
 
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axios.post('http://localhost:4000/posts', {title})
+        axios.post<{[key: string]: {id: number, title: string}}>('http://localhost:4000/posts', {title})
             .then( res => {
                 console.log(res.data)
             })
@@ -34,3 +34,5 @@ export default () => {
         </div>
     )
 }
+
+export default PostCreate

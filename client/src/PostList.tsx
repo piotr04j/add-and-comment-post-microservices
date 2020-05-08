@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import CommentCreate from "./CommentCreate";
 
-export default () => {
+const PostList: React.FC = () => {
 
     const[posts, setPosts] = useState<{[key: string]: {id: number, title: string}}>({})
 
     useEffect(() => {
-        axios.get('http://localhost:4000/posts')
+        axios.get<{[key: string]: {id: number, title: string}}>('http://localhost:4000/posts')
             .then( res => {
                 setPosts(res.data)
             })
@@ -20,7 +20,7 @@ export default () => {
                      <div className='card' style={{marginBottom: '20px', width: '30%'}} key={post.id}>
                          <div className="card-body">
                              <h3>{post.title}</h3>
-                             <CommentCreate id={post.id.toString()} />
+                             <CommentCreate postId={post.id.toString()} />
                          </div>
                      </div>
                  )
@@ -29,3 +29,5 @@ export default () => {
         </div>
     )
 }
+
+export default PostList

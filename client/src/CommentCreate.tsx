@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
-const CommentCreate: React.FC<{id: string}> =  ({id}) => {
+const CommentCreate: React.FC<{postId: string}> =  ({postId}) => {
     const[content, setContent] = useState<string>('')
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axios.post<any, {data: any}>(`http://localhost:4001/posts/${id}/comments`, {content})
+        axios.post<Array<{id: string, content: string}>>(`http://localhost:4007/posts/${postId}/comments`, {content})
             .then( res => {
-                res.data
                 console.log(res.data)
             })
         setContent('')

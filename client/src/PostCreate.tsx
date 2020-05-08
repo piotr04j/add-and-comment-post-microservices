@@ -3,12 +3,10 @@ import axios from 'axios'
 
 
 const PostCreate: React.FC = () => {
-
     const[title, setTitle] = useState<string>('')
-
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axios.post<{[key: string]: {id: number, title: string}}>('http://localhost:4000/posts', {title})
+        axios.post<{[key: string]: {id: string, title: string}}>('http://localhost:4000/posts', {title})
             .then( res => {
                 console.log(res.data)
             })

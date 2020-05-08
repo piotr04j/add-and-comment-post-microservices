@@ -5,7 +5,7 @@ const CommentCreate: React.FC<{postId: string}> =  ({postId}) => {
     const[content, setContent] = useState<string>('')
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axios.post<Array<{id: string, content: string}>>(`http://localhost:4007/posts/${postId}/comments`, {content})
+        axios.post<Array<{id: string, content: string}>>(`http://localhost:4001/posts/${postId}/comments`, {content})
             .then( res => {
                 console.log(res.data)
             })

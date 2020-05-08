@@ -3,25 +3,36 @@ import axios from 'axios'
 import CommentCreate from "./CommentCreate";
 import CommentList from "./CommentList";
 
+export type Comments = Array<{id: string, content: string, postId: string}>
+
+interface IPosts {
+    [key: string]: {
+        id: string,
+        title: string,
+        comments: Comments
+    }
+}
+
 const PostList: React.FC = () => {
-    const[posts, setPosts] = useState<{[key: string]: {id: string, title: string}}>({})
+    const[posts, setPosts] = useState<IPosts>({})
 
     useEffect(() => {
-        axios.get<{[key: string]: {id: string, title: string}}>('http://localhost:4000/posts')
+        axios.get<IPosts>('http://localhost:4002/posts')
             .then( res => {
                 setPosts(res.data)
+                console.log(res.data)
             })
     }, [])
 
     return (
         <div className="d-flex d-row justify-content-between flex-wrap">
             {
-                Object.values<{id: string, title: string}>(posts).map( post => {
+                Object.values(posts).map( post => {
                      return (
                          <div className='card' style={{marginBottom: '20px', width: '30%'}} key={post.id}>
                              <div className="card-body">
                                  <h3>{post.title}</h3>
-                                 <CommentList postId={post.id} />
+                                 <CommentList comments={post.comments} />
                                  <CommentCreate postId={post.id} />
                              </div>
                          </div>

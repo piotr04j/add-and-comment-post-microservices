@@ -1,15 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import axios from 'axios'
+import { Comments } from './PostList'
 
-const CommentList: React.FC<{postId: string}> = ({postId}) => {
-    const[comments, setComments] = useState<Array<{id: string, content: string}>>([])
-
-    useEffect(() => {
-        axios.get<Array<{id: string, content: string}>>(`http://localhost:4001/posts/${postId}/comments`)
-            .then( res => {
-                setComments(res.data)
-            })
-    }, [])
+const CommentList: React.FC<{comments: Comments}> = ({comments}) => {
 
     return (
         <ul>

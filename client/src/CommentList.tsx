@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { Comments } from './PostList'
 
 const CommentList: React.FC<{comments: Comments}> = ({comments}) => {
@@ -8,7 +7,14 @@ const CommentList: React.FC<{comments: Comments}> = ({comments}) => {
         <ul>
             {
                 comments.map( comment => {
-                    return <li key={comment.id}>{comment.content}</li>
+                    return <li key={comment.id}>
+                        { comment.status === 'approved'
+                            ? comment.content
+                            : comment.status === 'pending' ?
+                                'Comment is awaiting moderation!'
+                                : 'Comment has been rejected!'
+                        }
+                    </li>
                 })
             }
         </ul>

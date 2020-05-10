@@ -3,7 +3,7 @@ import axios from 'axios'
 import CommentCreate from "./CommentCreate";
 import CommentList from "./CommentList";
 
-export type Comments = Array<{id: string, content: string, postId: string}>
+export type Comments = Array<{id: string, content: string, postId: string, status: 'pending' | 'rejected' | 'approved'}>
 
 interface IPosts {
     [key: string]: {
